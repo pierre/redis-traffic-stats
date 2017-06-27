@@ -471,7 +471,7 @@ EOR
                          keys %{ $stats->{cmd}{$cmd}{key} }) {
             my $s = $stats->{cmd}{$cmd}{key}{$key};
             printf("%-*s | %*d | %*.2f | %*d | %*.2f | %*.2f\n",
-                   $width[0], $key,
+                   $width[0], trim(escape_nonprintable($key)),
                    $width[1], $s->{bytes},
                    $width[2], $s->{bytes}/$duration,
                    $width[3], $s->{count},
