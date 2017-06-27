@@ -411,7 +411,7 @@ EOR
                      keys %{ $stats->{cmd} }) {
         my $s = $stats->{cmd}{$cmd};
         printf("%-*s | %*d | %*.2f | %*.2f\n",
-               $width[0], $cmd,
+               $width[0], trim(escape_nonprintable($cmd)),
                $width[1], $s->{count},
                $width[2], $s->{count}/$stats->{total_req}*100,
                $width[3], $s->{count}/$duration,
@@ -434,7 +434,7 @@ EOR
                      keys %{ $stats->{cmd} }) {
         my $s = $stats->{cmd}{$cmd};
         printf("%-*s | %*d | %*.2f\n",
-               $width[0], $cmd,
+               $width[0], trim(escape_nonprintable($cmd)),
                $width[1], $s->{bytes},
                $width[2], $s->{bytes}/$duration,
            );
@@ -532,7 +532,7 @@ sub escape_nonprintable {
 
 sub trim {
     my $s = shift;
-    my $len = 70;
+    my $len = 10;
     if (length $s > $len) {
         return substr($s,0,$len).'...';
     } else {
@@ -562,7 +562,7 @@ B) Capture packets on demand and analyze it
 
     Capture 5000 packets
     # redis-traffic-stats -i eth0 -c 5000
-    
+
     Capture for 10 sec
     # redis-traffic-stats -i eth0 -t 10
 
